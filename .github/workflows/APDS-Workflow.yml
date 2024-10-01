@@ -1,56 +1,37 @@
-name: APDS CI Workflow
+name: APDS-Workflow
 
-on:
-  push:
-    branches: [main]  # Trigger workflow on push to main
-  pull_request:
-    branches: [main]  # Trigger workflow on pull requests to main
+on: push
 
 jobs:
-  client-server:
+  apds-workflow:
+    name: Checkout, build and test
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]  # Specify Node versions to test against
-
     steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Set up Node.js for both client and server
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
 
-      # 1. Install dependencies for the client
       - name: Install client dependencies
         working-directory: ./client
         run: npm install
 
-      # 2. Run tests for the client
-      - name: Run client tests
-        working-directory: ./client
-        run: npm test
-
-      # 3. Build the client (if necessary)
       - name: Build client
         working-directory: ./client
         run: npm run build
 
-      # 4. Install dependencies for the server
+      - name: Test client
+        working-directory: ./client
+        run: npm test
+
       - name: Install server dependencies
         working-directory: ./server
         run: npm install
 
-      # 5. Run tests for the server
-      - name: Run server tests
+      - name: Test server
         working-directory: ./server
         run: npm test
-
-      # 6. Run the server (optional, for deployment or further testing)
-      - name: Run server
-        working-directory: ./server
-        run: npm start
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
