@@ -1,6 +1,10 @@
-name:actions
+name: APDS CI Workflow
 
-on:push:branches:[ main ]
+on:
+  push:
+    branches: [main]  # Trigger workflow on push to main
+  pull_request:
+    branches: [main]  # Trigger workflow on pull requests to main
 
 jobs:
   client-server:
@@ -8,14 +12,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]   # Specify Node versions to test against
+        node-version: [16.x, 18.x]  # Specify Node versions to test against
 
     steps:
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up Node.js for the client and server
+      # Set up Node.js for both client and server
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
