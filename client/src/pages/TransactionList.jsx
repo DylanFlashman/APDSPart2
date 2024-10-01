@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function TransactionList() {
   const [transactions, setTransactions] = useState([]);
@@ -23,11 +24,12 @@ export default function TransactionList() {
       <ul>
         {transactions.map((transaction) => (
           <li key={transaction._id}>
+            <p>User ID: {transaction._id}</p>
             <p>Amount: {transaction.amount}</p>
             <p>Currency: {transaction.currency}</p>
             <p>Account Number: {transaction.accountNumber}</p>
             <p>Status: {transaction.status}</p>
-            <a href={`/verify-transaction/${transaction._id}`}>Verify</a>
+            <Link to={`/verify/${transaction._id}`}>Verify</Link>
           </li>
         ))}
       </ul>

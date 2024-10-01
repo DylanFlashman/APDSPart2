@@ -25,7 +25,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/submitPayment' element={<SubmitPayment />} /> {/* Add this */}
         <Route path='/transactions' element={<TransactionList />} /> {/* Add this */}
-        <Route path='/verifyTransaction/:id' element={<VerifyTransaction />} />
+        <Route path='/verify/:id' element={<VerifyTransaction />} />
+        
       </Routes>
     </UserContextProvider>
   )

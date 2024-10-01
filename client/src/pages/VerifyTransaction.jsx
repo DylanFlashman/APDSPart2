@@ -22,7 +22,7 @@ export default function VerifyTransaction() {
 
   const verifyTransaction = async () => {
     try {
-      await axios.post('/api/payments/verify', { paymentId: id });
+      await axios.post(`/api/payments/verify`,{ paymentId: id });
       toast.success('Transaction verified and submitted to SWIFT');
     } catch (error) {
       toast.error('Error verifying transaction');

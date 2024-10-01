@@ -7,6 +7,8 @@ export default function Navbar() {
       <Link to='/register'>Register</Link>
       <Link to='/Login'>Login</Link>
       <Link to='/SubmitPayment'>Payment</Link>
+      <Link to='/transactions'>TransactionList</Link>
+      <Link to='/verify'>Verify</Link>
     </nav>
   )
 }
