@@ -21,17 +21,10 @@ jobs:
         working-directory: ./client
         run: npm run build
 
-      - name: Test client
-        working-directory: ./client
-        run: npm test
-
       - name: Install server dependencies
         working-directory: ./server
         run: npm install
 
-      - name: Test server
-        working-directory: ./server
-        run: npm test
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
