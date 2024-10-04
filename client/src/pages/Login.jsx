@@ -32,7 +32,7 @@ export default function Login() {
         Cookies.set('token', data.token);
         setUser({ id: data.id, name: data.name, email: data.email });
         setData({});
-        navigate('/');
+        navigate('/SubmitPayment');
       }
     } catch (error) {
       
@@ -40,15 +40,44 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={loginUser}>
-        <label>Username</label>
-        <input type='text' placeholder='enter username...' value={data.username} onChange={(e) => setData({...data,username: e.target.value})}/>
-        <label>Account Number</label>
-        <input type='text' placeholder='enter account number...' value={data.accountNumber} onChange={(e) => setData({...data,accountNumber: e.target.value})}/>
-        <label>Password</label>
-        <input type='password' placeholder='enter password...' value={data.password} onChange={(e) => setData({...data,password: e.target.value})}/>
-        <button type='submit'>Login</button>
+    <div className="login-container">
+      <form onSubmit={loginUser} className="login-form">
+        <h1 className="form-title">Login</h1>
+
+        <div className="form-group">
+          <label className="form-label">Username</label>
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Enter username..."
+            value={data.username}
+            onChange={(e) => setData({ ...data, username: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Account Number</label>
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Enter account number..."
+            value={data.accountNumber}
+            onChange={(e) => setData({ ...data, accountNumber: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className="form-input"
+            placeholder="Enter password..."
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+          />
+        </div>
+
+        <button type="submit" className="submit-btn">Login</button>
       </form>
     </div>
   )

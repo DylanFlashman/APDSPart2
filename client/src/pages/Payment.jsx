@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
+import './PaymentPage.css';
 
 export default function Payment() {
     const navigate = useNavigate()
@@ -60,42 +61,57 @@ export default function Payment() {
   };
 
   return (
-    <div>
-      <h1>Submit Payment</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Amount</label>
-        <input
-          type='number'
-          value={data.amount}
-          onChange={(e) => setData({ ...data, amount: e.target.value })}
-        />
+    <div className="form-container">
+      <h1 className="form-title">Submit Payment</h1>
+      <form onSubmit={handleSubmit} className="payment-form">
+        <div className="form-group">
+          <label className="form-label">Amount</label>
+          <input
+            type="number"
+            value={data.amount}
+            onChange={(e) => setData({ ...data, amount: e.target.value })}
+            className="form-input"
+            placeholder="Enter amount"
+          />
+        </div>
 
-        <label>Currency</label>
-        <select
-          value={data.currency}
-          onChange={(e) => setData({ ...data, currency: e.target.value })}
-        >
-          <option value='USD'>USD</option>
-          <option value='ZAR'>ZAR</option>
-          <option value='EUR'>EUR</option>
-          {/* Add other currencies as needed */}
-        </select>
+        <div className="form-group">
+          <label className="form-label">Currency</label>
+          <select
+            value={data.currency}
+            onChange={(e) => setData({ ...data, currency: e.target.value })}
+            className="form-select"
+          >
+            <option value="USD">USD</option>
+            <option value="ZAR">ZAR</option>
+            <option value="EUR">EUR</option>
+            {/* Add other currencies as needed */}
+          </select>
+        </div>
 
-        <label>Account Number</label>
-        <input
-          type='text'
-          value={data.accountNumber}
-          onChange={(e) => setData({ ...data, accountNumber: e.target.value })}
-        />
+        <div className="form-group">
+          <label className="form-label">Account Number</label>
+          <input
+            type="text"
+            value={data.accountNumber}
+            onChange={(e) => setData({ ...data, accountNumber: e.target.value })}
+            className="form-input"
+            placeholder="Enter account number"
+          />
+        </div>
 
-        <label>SWIFT Code</label>
-        <input
-          type='text'
-          value={data.swiftCode}
-          onChange={(e) => setData({ ...data, swiftCode: e.target.value })}
-        />
+        <div className="form-group">
+          <label className="form-label">SWIFT Code</label>
+          <input
+            type="text"
+            value={data.swiftCode}
+            onChange={(e) => setData({ ...data, swiftCode: e.target.value })}
+            className="form-input"
+            placeholder="Enter SWIFT code"
+          />
+        </div>
 
-        <button type='submit'>Pay Now</button>
+        <button type="submit" className="submit-btn">Pay Now</button>
       </form>
     </div>
   );
