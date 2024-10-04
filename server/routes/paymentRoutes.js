@@ -24,7 +24,7 @@ router.get('/transactions/:id', async (req, res) => {
         return res.status(404).json({ error: 'Transaction not found' });
       }
   
-      res.json(payment); // Return the transaction details to the frontend
+      res.json(payment); 
     } catch (error) {
       console.error(error);
       res.status(500).send('Server error');

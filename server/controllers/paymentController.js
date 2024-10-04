@@ -5,7 +5,7 @@ const submitPayment = async (req, res) =>{
    // const userId = localStorage.getItem('userId');
 
     try {
-        const { amount, currency, accountNumber, swiftCode, customerId } = req.body;
+        const { amount, currency, accountNumber, customerId } = req.body;
 
         // Check if customerId is present
     //if (!customerId) {
@@ -17,7 +17,7 @@ const submitPayment = async (req, res) =>{
             amount,
             currency,
             accountNumber,
-            swiftCode,
+            
             customerId
         });
 

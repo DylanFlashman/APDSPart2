@@ -12,7 +12,10 @@ export default function Home() {
           <h1>Banking App</h1> {/* Your application name */}
         </div>
         <nav className="nav-links">
+          <Link to="/Register" className="nav-link">Register</Link>
+          <Link to="/Login" className="nav-link">Login</Link>
           <Link to="/SubmitPayment" className="nav-link">Payments</Link>
+          
           {/* <Link to="/profile" className="nav-link">Profile</Link>
           <Link to="/settings" className="nav-link">Settings</Link> */}
           {/* <Link to="/logout" className="nav-link">Logout</Link> */}
@@ -30,7 +33,7 @@ export default function Home() {
 
           {/* Button to Payments Page */}
           <div className="cta-buttons">
-            <Link to="/payment/SubmitPayment">
+            <Link to="/SubmitPayment">
               <button className="cta-btn">Go to Payments</button>
             </Link>
           </div>

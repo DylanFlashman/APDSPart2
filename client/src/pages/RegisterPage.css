@@ -74,6 +74,21 @@ body {
     outline: none;
     box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
   }
+
+  .back-btn {
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: blue;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background-color: blue;
+  }
   
   @media (max-width: 600px) {
     .register-container {

@@ -7,7 +7,7 @@ const paymentSchema = new Schema({
     currency: { type: String, required: true },
     provider: { type: String, default: 'SWIFT' },
     accountNumber: { type: String, required: true },
-    swiftCode: { type: String, required: true },
+    // swiftCode: { type: String, required: true },
     status: { type: String, default: 'Pending' }, // Pending or Verified
     createdAt: { type: Date, default: Date.now }
 });

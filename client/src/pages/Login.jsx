@@ -4,6 +4,7 @@ import {toast} from 'react-hot-toast'
 import {useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie';
 import { UserContext } from '../../context/userContext';
+import './LoginPage.css';
 
 export default function Login() {
   const navigate = useNavigate()
@@ -38,6 +39,10 @@ export default function Login() {
       
     }
   }
+
+  const handleBackToHome = () => {
+    navigate('/'); 
+  };
 
   return (
     <div className="login-container">
@@ -78,6 +83,10 @@ export default function Login() {
         </div>
 
         <button type="submit" className="submit-btn">Login</button>
+
+        <button type="button" className="back-btn" onClick={handleBackToHome}>
+          Back to Home
+        </button>
       </form>
     </div>
   )

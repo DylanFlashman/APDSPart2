@@ -46,6 +46,7 @@ body {
     border: 1px solid #ced4da;
     border-radius: 5px;
     transition: border-color 0.3s ease;
+    color: #333;
   }
   
   .form-input:focus, .form-select:focus {

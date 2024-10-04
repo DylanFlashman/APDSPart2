@@ -34,6 +34,10 @@ export default function Register() {
     }
   }
 
+  const handleBackToHome = () => {
+    navigate('/'); 
+  };
+
   return (
     <div className="register-container">
       <form onSubmit={registerUser} className="register-form">
@@ -106,6 +110,10 @@ export default function Register() {
         </div>
 
         <button type="submit" className="submit-btn">Submit</button>
+
+        <button type="button" className="back-btn" onClick={handleBackToHome}>
+          Back to Home
+        </button>
       </form>
     </div>
   )

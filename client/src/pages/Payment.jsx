@@ -15,12 +15,11 @@ export default function Payment() {
     currency: '',
     provider: 'SWIFT', // Default to SWIFT
     accountNumber: '',
-    swiftCode: '',
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {amount,currency,provider,accountNumber,swiftCode} = data
+    const {amount,currency,provider,accountNumber} = data
     //const response = await axios.post('/api/payments/payment', data);
     //const userId = localStorage.getItem('userId');
     if (!user) {
@@ -35,7 +34,7 @@ export default function Payment() {
             currency,
             provider,
             accountNumber,
-            swiftCode,
+
             customerId: user.id
         });
         console.log(data.data);
@@ -58,6 +57,10 @@ export default function Payment() {
     } catch (error) {
       toast.error('Error submitting payment' + error);
     }
+  };
+
+  const handleBackToHome = () => {
+    navigate('/'); 
   };
 
   return (
@@ -100,7 +103,7 @@ export default function Payment() {
           />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label className="form-label">SWIFT Code</label>
           <input
             type="text"
@@ -109,9 +112,13 @@ export default function Payment() {
             className="form-input"
             placeholder="Enter SWIFT code"
           />
-        </div>
+        </div> */}
 
         <button type="submit" className="submit-btn">Pay Now</button>
+
+        <button type="button" className="back-btn" onClick={handleBackToHome}>
+          Back to Home
+        </button>
       </form>
     </div>
   );
