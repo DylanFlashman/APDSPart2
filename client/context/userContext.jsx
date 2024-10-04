@@ -13,7 +13,7 @@ export function UserContextProvider({children}){
         if (token) {
             axios.get('/profile', {
                 headers: {
-                    Authorization: `Bearer ${token}`  // Pass token in headers
+                    Authorization: `Bearer ${token}`  
                 },
             }).then(({data}) => {
                 console.log("Fetched user data:", data);
@@ -23,12 +23,6 @@ export function UserContextProvider({children}){
                 setUser(null);
             });
         }
-
-        //if(!user){
-           // axios.get('/profile').then(({data}) =>{
-           //     setUser(data)
-           // })
-        //}
     }, [])
     return(
         <UserContext.Provider value={{ user, setUser}}>

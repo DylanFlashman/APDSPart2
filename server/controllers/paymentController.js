@@ -7,17 +7,11 @@ const submitPayment = async (req, res) =>{
     try {
         const { amount, currency, accountNumber, customerId } = req.body;
 
-        // Check if customerId is present
-    //if (!customerId) {
-        // res.status(400).json({ error: 'Customer ID is required' });
-    //}
-
         const newPayment = new Payment({
 
             amount,
             currency,
-            accountNumber,
-            
+            accountNumber,  
             customerId
         });
 

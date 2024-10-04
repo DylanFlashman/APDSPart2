@@ -147,13 +147,13 @@ const getProfile = (req, res) =>{
         res.json(null)
     } */
 
-    const token = req.headers.authorization?.split(' ')[1]; // Get token from Authorization header
+    const token = req.headers.authorization?.split(' ')[1]; 
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
       if (err) {
         return res.status(401).json({ error: 'Unauthorized' });
       }
-      res.json(user); // Send the decoded user data
+      res.json(user); 
     });
   } else {
     res.status(401).json({ error: 'No token provided' });

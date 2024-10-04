@@ -4,15 +4,15 @@ import Navbar from '../src/components/Navbar';
 import Home from '../src/pages/Home'
 import Register from '../src/pages/Register';
 import Login from '../src/pages/Login';
-import SubmitPayment from '../src/pages/Payment'; // Add this
-import TransactionList from '../src/pages/TransactionList'; // Add this
-import VerifyTransaction from '../src/pages/VerifyTransaction'; // Add this
+import SubmitPayment from '../src/pages/Payment'; 
+import TransactionList from '../src/pages/TransactionList'; 
+import VerifyTransaction from '../src/pages/VerifyTransaction'; 
 import axios from 'axios';
 import {Toaster} from 'react-hot-toast'
 import { UserContext, UserContextProvider } from '../context/userContext';
 import ProtectedRoute from '../context/ProtectedRoutes';
 
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = 'https://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/submitPayment' element={<ProtectedRoute><SubmitPayment/></ProtectedRoute>} /> {/* Add this */}
-          <Route path='/transactions' element={<TransactionList />} /> {/* Add this */}
+          <Route path='/submitPayment' element={<ProtectedRoute><SubmitPayment/></ProtectedRoute>} /> 
+          <Route path='/transactions' element={<TransactionList />} /> 
           <Route path='/verify/:id' element={<VerifyTransaction />} />
       </Routes>
     </UserContextProvider>

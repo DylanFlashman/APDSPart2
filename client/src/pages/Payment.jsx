@@ -13,7 +13,7 @@ export default function Payment() {
     //customerId: '',
     amount: '',
     currency: '',
-    provider: 'SWIFT', // Default to SWIFT
+    provider: 'SWIFT', 
     accountNumber: '',
   });
 
@@ -85,10 +85,10 @@ export default function Payment() {
             onChange={(e) => setData({ ...data, currency: e.target.value })}
             className="form-select"
           >
+            <option value="">Currency</option>
             <option value="USD">USD</option>
             <option value="ZAR">ZAR</option>
             <option value="EUR">EUR</option>
-            {/* Add other currencies as needed */}
           </select>
         </div>
 
