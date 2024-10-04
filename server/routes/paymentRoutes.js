@@ -5,12 +5,12 @@ const { submitPayment, getPendingTransactions, verifyTransactions } = require('.
 const PaymentModel = require('../models/payment');
 
 //middleware
-router.use(
-    cors({
-        credentials: true,
-        origin: 'http://localhost:5173'
-    })
-)
+// router.use(
+//     cors({
+//         credentials: true,
+//         origin: 'http://localhost:5173'
+//     })
+// )
 
 router.post('/payment', submitPayment);
 router.get('/transactions', getPendingTransactions);
