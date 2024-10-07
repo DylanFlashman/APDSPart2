@@ -7,7 +7,8 @@ const paymentSchema = new Schema({
     currency: { type: String, required: true },
     provider: { type: String, default: 'SWIFT' },
     accountNumber: { type: String, required: true },
-    // swiftCode: { type: String, required: true },
+    swiftCode: { type: String, required: true },
+    reference:{type: String, required:true},
     status: { type: String, default: 'Pending' }, 
     createdAt: { type: Date, default: Date.now }
 });

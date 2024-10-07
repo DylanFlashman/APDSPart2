@@ -15,11 +15,13 @@ export default function Payment() {
     currency: '',
     provider: 'SWIFT', 
     accountNumber: '',
+    swiftCode: '',
+    reference:''
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {amount,currency,provider,accountNumber} = data
+    const {amount,currency,provider,accountNumber,swiftCode,reference} = data
     //const response = await axios.post('/api/payments/payment', data);
     //const userId = localStorage.getItem('userId');
     if (!user) {
@@ -34,7 +36,8 @@ export default function Payment() {
             currency,
             provider,
             accountNumber,
-
+            swiftCode,
+            reference,
             customerId: user.id
         });
         console.log(data.data);
@@ -42,6 +45,7 @@ export default function Payment() {
             toast.error(data.error)
         }
         else{
+            toast.success('Payment Submitted Successfully');
             setData({});
             navigate('/')
         }
@@ -89,6 +93,9 @@ export default function Payment() {
             <option value="USD">USD</option>
             <option value="ZAR">ZAR</option>
             <option value="EUR">EUR</option>
+            <option value="YEN">YEN</option>
+            <option value="AUD">AUD</option>
+            <option value="GBP">GBP</option>
           </select>
         </div>
 
@@ -103,7 +110,7 @@ export default function Payment() {
           />
         </div>
 
-        {/* <div className="form-group">
+       <div className="form-group">
           <label className="form-label">SWIFT Code</label>
           <input
             type="text"
@@ -112,8 +119,18 @@ export default function Payment() {
             className="form-input"
             placeholder="Enter SWIFT code"
           />
-        </div> */}
+        </div> 
 
+        <div className="form-group">
+          <label className="form-label">Payement Reference</label>
+          <input
+            type="text"
+            value={data.reference}
+            onChange={(e) => setData({...data, reference: e.target.value})}
+            className="form-input"
+            placeholder='Enter payment reference'
+          />
+        </div>
         <button type="submit" className="submit-btn">Pay Now</button>
 
         <button type="button" className="back-btn" onClick={handleBackToHome}>

@@ -5,15 +5,24 @@ const submitPayment = async (req, res) =>{
    // const userId = localStorage.getItem('userId');
 
     try {
-        const { amount, currency, accountNumber, customerId } = req.body;
+        const { amount, currency, accountNumber, swiftCode, reference, customerId } = req.body;
 
         const newPayment = new Payment({
 
             amount,
             currency,
-            accountNumber,  
+            accountNumber,
+            swiftCode,
+            reference, 
             customerId
         });
+
+        const swiftExists = await Payment.findOne({swiftCode})
+        if(swiftExists){
+            return res.json({
+                error: 'Swift Code already exists'
+            })
+        }
 
         await newPayment.save();
         res.json({ message: 'Payment submitted successfully', payment: newPayment });
