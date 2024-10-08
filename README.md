@@ -45,6 +45,7 @@ Users must login before making any payments. The login screen requires the user 
   - Username
   - Account Number
   - Password
+    
 
 Once all the required information is provided the user can click the login button and they will be taken to the payment screen. The user can click the back to home button will be taken back to the home page.
 
@@ -54,6 +55,8 @@ To complete a payment users must provide the following information:
   - Amount
   - Currency
   - Account Number
+  - Swift Code
+  - Payment Reference
 
 The user can click the Pay now button which will process their payment. The user can click the back to home and will be taken back to the home page.
 
