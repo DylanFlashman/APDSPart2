@@ -1,4 +1,4 @@
-Payment Management App
+Payment Portal
 Overview
 
 This app allows users to create an account, login and make payments
