@@ -60,7 +60,6 @@ The user can click the Pay now button which will process their payment. The user
 Technologies Used
 
 - React: JavaScript library for building user interfaces. 
-- JavaScript: Programming language for application logic. 
 - HTML5 & CSS3: Markup and styling for the web pages. 
 - Node.js: Runtime for the server-side application. 
 - npm: Package manager for managing project dependencies. 
