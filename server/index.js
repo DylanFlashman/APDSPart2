@@ -65,3 +65,5 @@ const port = 8000;
 https.createServer(sslOptions, app).listen(8000, () => {
     console.log('HTTPS Server running on port 8000');
   });
+
+  module.exports = app;
