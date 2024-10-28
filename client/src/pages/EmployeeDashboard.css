@@ -1,0 +1,38 @@
+/* EmployeeDashboard.css */
+
+.dashboard-container {
+    max-width: 800px; /* Limit the maximum width */
+    margin: 20px auto; /* Center align the container */
+    padding: 20px; /* Add some padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #ffffff; /* White background */
+  }
+  
+  .dashboard-title {
+    text-align: center; /* Center the title */
+    color: #333; /* Dark text for readability */
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  .dashboard-links {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Column layout */
+    gap: 15px; /* Space between links */
+  }
+  
+  .dashboard-link {
+    text-decoration: none; /* Remove underline */
+    padding: 15px; /* Padding for better clickability */
+    border: 1px solid #007bff; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Button color */
+    color: white; /* White text */
+    text-align: center; /* Center text */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .dashboard-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  

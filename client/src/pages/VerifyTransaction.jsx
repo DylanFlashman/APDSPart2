@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
@@ -35,6 +35,9 @@ export default function VerifyTransaction() {
 
   return (
     <div style={styles.container}>
+      <Link to="/transactions" style={styles.backLink}>
+        &lt; Back to Transaction List
+      </Link>
       <h1 style={styles.heading}>Verify Transaction</h1>
       <div style={styles.transactionDetails}>
         <p><strong>Amount:</strong> {transaction.amount}</p>

@@ -96,6 +96,44 @@ const registerUser = async (req,res) =>{
     }
 };
 
+//Registering Employees
+// Add this function to create an employee user
+const registerEmployee = async (req, res) => {
+    try {
+        const { name, username, email, idNumber, accountNumber, password } = req.body;
+
+        // Check if required fields are provided
+        if (!name || !username || !email || !idNumber || !accountNumber || !password) {
+            return res.json({ error: 'All fields are required.' });
+        }
+
+        // Check if the user already exists
+        const exist = await User.findOne({ email });
+        if (exist) {
+            return res.json({ error: 'Email is already in use' });
+        }
+
+        const hashedPassword = await hashPassword(password);
+
+        // Create the employee with role set to 'employee'
+        const employee = await User.create({
+            name,
+            username,
+            email,
+            idNumber,
+            accountNumber,
+            password: hashedPassword,
+            role: 'employee',
+        });
+
+        return res.status(201).json(employee);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error creating employee' });
+    }
+};
+
+
 //Login Users Endpoint
 const loginUser = async (req, res) => {
     try{
@@ -119,9 +157,9 @@ const loginUser = async (req, res) => {
     //check passwords match
     const match = await comparePassword(password, user.password);
     if(match){
-        jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) =>{
+        jwt.sign({email: user.email, id: user._id, name: user.name, role: user.role}, process.env.JWT_SECRET, {}, (err, token) =>{
             if(err) throw err;
-            res.cookie('token', token).json({ id: user._id, token })
+            res.cookie('token', token).json({ id: user._id, name: user.name, email: user.email, role: user.role, token})
         })
     }
     if(!match){
@@ -165,5 +203,6 @@ module.exports = {
     test,
     registerUser,
     loginUser,
-    getProfile
+    getProfile,
+    registerEmployee
 }

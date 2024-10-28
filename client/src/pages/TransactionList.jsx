@@ -21,6 +21,9 @@ export default function TransactionList() {
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Pending Transactions</h1>
+      <Link to="/employee-dashboard" style={styles.backLink}>
+        &lt; Back to Dashboard
+      </Link>
       <ul style={styles.transactionList}>
         {transactions.map((transaction) => (
           <li key={transaction._id} style={styles.transactionItem}>

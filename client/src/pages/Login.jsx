@@ -30,10 +30,18 @@ export default function Login() {
 
         //localStorage.setItem('userId', data.data.id );
         //localStorage.setItem('token', data.data.token);
+        localStorage.setItem('token', data.token);
         Cookies.set('token', data.token);
-        setUser({ id: data.id, name: data.name, email: data.email });
-        setData({});
-        navigate('/SubmitPayment');
+        console.log('Token stored in cookie:', data.token);
+        setUser({ id: data.id, name: data.name, email: data.email, role: data.role });
+       
+        // navigate('/SubmitPayment');
+        if (data.role === 'customer') {
+          navigate('/SubmitPayment');
+      } else if (data.role === 'employee') {
+          navigate('/employee-dashboard');
+      }
+      setData({});
       }
     } catch (error) {
       

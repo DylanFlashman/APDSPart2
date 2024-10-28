@@ -7,6 +7,8 @@ import Login from '../src/pages/Login';
 import SubmitPayment from '../src/pages/Payment'; 
 import TransactionList from '../src/pages/TransactionList'; 
 import VerifyTransaction from '../src/pages/VerifyTransaction'; 
+import RegisterEmployee from '../src/pages/RegisterEmployee';
+import EmployeeDashboard from './pages/EmployeeDashboard';
 import axios from 'axios';
 import {Toaster} from 'react-hot-toast'
 import { UserContext, UserContextProvider } from '../context/userContext';
@@ -28,8 +30,10 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/submitPayment' element={<ProtectedRoute><SubmitPayment/></ProtectedRoute>} /> 
+          <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
           <Route path='/transactions' element={<TransactionList />} /> 
           <Route path='/verify/:id' element={<VerifyTransaction />} />
+          <Route path="/register-employee" element={<RegisterEmployee/>} />
       </Routes>
     </UserContextProvider>
   )
