@@ -27,7 +27,7 @@ jobs:
 
       # Store test results
       - store_test_results:
-          path: newman
+          path: newman/results.xml
       - store_artifacts:
           path: newman
 
