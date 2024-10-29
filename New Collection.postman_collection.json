@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "430fbb1d-442c-4f55-b916-63368832a561",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39352218"
+	},
+	"item": [
+		{
+			"name": "UserLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"Reg\",\r\n  \"accountNumber\": \"102030405\",\r\n  \"password\": \"ReggyB21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8000/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Emp\",\r\n    \"accountNumber\": \"211706990\",\r\n    \"password\": \"Employee21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8000/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserSubmitPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\":\"8000\",\r\n    \"currency\": \"ZAR\",\r\n    \"accountNumber\": \"102030405\",\r\n    \"swiftCode\": \"AASEDCER\",\r\n    \"reference\": \"test\",\r\n    \"customerId\":\"671fd01409316af185a07da0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8000/api/payments/payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"payments",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeGetTransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8000/api/payments/transactions",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"payments",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTransaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8000/api/payments/transactions/67209040ba304a4f362f2acc",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"payments",
+						"transactions",
+						"67209040ba304a4f362f2acc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerifyTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentId\":\"67209040ba304a4f362f2acc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8000/api/payments/verify",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"payments",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

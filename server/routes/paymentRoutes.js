@@ -22,7 +22,7 @@ const checkAdmin = (req, res, next) => {
 
 router.post('/payment', submitPayment);
 router.get('/transactions', getPendingTransactions);
-router.post('/verify',checkAdmin, verifyTransactions);
+router.post('/verify', verifyTransactions);
 router.get('/transactions/:id', async (req, res) => {
     try {
       const { id } = req.params;

@@ -11,12 +11,12 @@ export default function Home() {
         <div className="logo">
           <h1>International Banking Portal App</h1> 
         </div>
-        <nav className="nav-links">
+        {/* <nav className="nav-links">
           <Link to="/Register" className="nav-link">Register</Link>
           <Link to="/Login" className="nav-link">Login</Link>
           <Link to="/SubmitPayment" className="nav-link">Payments</Link>
           
-        </nav>
+        </nav> */}
       </header>
 
       <div className="main-content">
