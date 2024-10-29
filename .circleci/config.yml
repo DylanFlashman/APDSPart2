@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: circleci/node:14.18-browsers  # Use a compatible Node.js version
+      - image: cimg/node:23.1.0  # Use a compatible Node.js version
     working_directory: ~/repo
 
 jobs:
