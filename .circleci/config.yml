@@ -4,13 +4,16 @@ executors:
   node-executor:
     docker:
       - image: cimg/node:23.1.0
-    working_directory: ~/repo/server
+    working_directory: ~/repo  # Adjust if needed
 
 jobs:
   test-postman-collection:
     executor: node-executor
     steps:
       - checkout
+      - run:
+          name: Debug file structure
+          command: ls -R
       - run:
           name: List files in server folder
           command: |
@@ -19,17 +22,17 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            npm i
+            cd server && npm install
       - run:
           name: Run Postman Collection with Newman
           command: |
-            npx newman run "server/NewCollection.postman_collection.json" \
+            cd server && npx newman run "NewCollection.postman_collection.json" \
               --reporters cli,junit \
               --reporter-junit-export "newman/results.xml"
       - store_test_results:
-          path: newman/results.xml
+          path: server/newman/results.xml
       - store_artifacts:
-          path: newman
+          path: server/newman
 
 workflows:
   version: 2
