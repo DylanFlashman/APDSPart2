@@ -31,3 +31,9 @@ jobs:
           path: newman/results.xml
       - store_artifacts:
           path: newman
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-postman-collection
