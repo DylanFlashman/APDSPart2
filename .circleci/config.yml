@@ -20,17 +20,18 @@ jobs:
           name: Install Dependencies
           command: |
             apt-get update && apt-get install -y jq
-            npm install -g newman
+            npm install newman
       - run:
           name: Run Postman Collection with Newman
           command: |
-            newman run "server/NewCollection.postman_collection.json" \
+            npx newman run "server/NewCollection.postman_collection.json" \
               --reporters cli,junit \
               --reporter-junit-export "newman/results.xml"
       - store_test_results:
           path: newman/results.xml
       - store_artifacts:
           path: newman
+
 
 workflows:
   version: 2
