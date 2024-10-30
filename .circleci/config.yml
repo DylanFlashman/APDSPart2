@@ -36,7 +36,4 @@ workflows:
   test:
     jobs:
       - test-postman-collection:
-          filters:
-            branches:
-              only:
-                - main
+          
