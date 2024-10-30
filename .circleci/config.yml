@@ -31,13 +31,12 @@ jobs:
       - store_artifacts:
           path: newman
 
-
 workflows:
   version: 2
   test:
     jobs:
-      - test-postman-collection
-      filters:
+      - test-postman-collection:
+          filters:
             branches:
               only:
                 - main
