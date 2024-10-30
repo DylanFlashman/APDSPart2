@@ -25,7 +25,7 @@ jobs:
             cd server && npm install
       - run:
           name: Install Newman Globally
-          command: npm install -g newman
+          command: npm install newman
       - run:
           name: Run Postman Collection with Newman
           command: |
