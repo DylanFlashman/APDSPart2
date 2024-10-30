@@ -4,7 +4,7 @@ executors:
   node-executor:
     docker:
       - image: cimg/node:23.1.0
-    working_directory: ~/repo
+    working_directory: ~/repo/server
 
 jobs:
   test-postman-collection:
