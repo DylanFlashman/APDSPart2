@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Run Postman Collection with Newman
           command: |
-            newman run ./server/NewCollection.postman_collection.json \
+            newman run server/NewCollection.postman_collection.json \
               
               --reporters cli,junit \
               --reporter-junit-export newman/results.xml
