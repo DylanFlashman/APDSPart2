@@ -19,6 +19,7 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
+    "newman": "^6.2.1",
     "nodemon": "^3.1.7"
   },
   "devDependencies": {
