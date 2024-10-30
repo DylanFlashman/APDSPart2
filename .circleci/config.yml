@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Run Postman Collection with Newman
           command: |
-            cd server && npx newman run "NewCollection.postman_collection.json" \
+            cd server && newman run "NewCollection.postman_collection.json" \
               --reporters cli,junit \
               --reporter-junit-export "newman/results.xml"
       - store_test_results:
