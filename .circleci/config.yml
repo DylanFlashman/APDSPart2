@@ -1,0 +1,52 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:23.1.0
+    working_directory: ~/repo  # Adjust if needed
+
+jobs:
+  test-postman-collection:
+    executor: node-executor
+    steps:
+      - checkout
+      - run:
+          name: Debug file structure
+          command: ls -R
+      - run:
+          name: List files in server folder
+          command: |
+            echo "Checking file structure:"
+            find ./server
+      - run:
+          name: Install Dependencies
+          command: |
+            cd server && npm install
+      - run:
+          name: Install Newman Locally
+          command: npm install newman
+      - run:
+          name: Start API Server
+          command: |
+            cd server && npm start &
+      - run:
+          name: Wait for server to start
+          command: sleep 10
+      - run:
+          name: Run Postman Collection with Newman
+          command: |
+            ./node_modules/.bin/newman run "./server/NewCollection.postman_collection.json" \
+              --reporters cli,junit \
+              --reporter-junit-export "server/newman/results.xml"
+
+      - store_test_results:
+          path: server/newman/results.xml
+      - store_artifacts:
+          path: server/newman
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-postman-collection
