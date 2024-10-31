@@ -24,9 +24,6 @@ jobs:
           command: |
             cd server && npm install
       - run:
-          name: Install Newman Globally
-          command: npm install -g newman
-      - run:
           name: Install Newman Locally
           command: npm install newman
       - run:
