@@ -21,10 +21,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8000/login",
+					"raw": "https://127.0.0.1:8000/login",
 					"protocol": "https",
 					"host": [
-						"localhost"
+						"127.0.0.1:8000"
 					],
 					"port": "8000",
 					"path": [
