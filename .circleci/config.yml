@@ -27,7 +27,6 @@ jobs:
           name: Start API Server
           command: |
             cd server && npm start &
-
       - run:
           name: Install Newman Locally
           command: npm install newman
