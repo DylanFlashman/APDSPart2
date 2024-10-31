@@ -25,13 +25,13 @@ jobs:
             cd server && npm install
       - run:
           name: Install Newman Globally
-          command: cd server && npm install newman
+          command: npm install -g newman
       - run:
           name: Run Postman Collection with Newman
           command: |
-            ./server/node_modules/.bin/newman run "./server/NewCollection.postman_collection.json" \
+            newman run "./server/NewCollection.postman_collection.json" \
               --reporters cli,junit \
-              --reporter-junit-export "newman/results.xml"
+              --reporter-junit-export "server/newman/results.xml"
       - store_test_results:
           path: server/newman/results.xml
       - store_artifacts:
