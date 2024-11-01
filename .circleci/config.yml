@@ -3,52 +3,61 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:23.1.0
+      - image: cimg/node:18.20.2  # Update to match your Node.js version
     working_directory: ~/repo  # Adjust if needed
 
 jobs:
-  test-postman-collection:
-    executor: node-executor
+  sonarqube:
+    docker:
+      - image: cimg/node:18.20.2
+    resource_class: small
     steps:
       - checkout
       - run:
-          name: Debug file structure
-          command: ls -R
-      - run:
-          name: List files in server folder
+          name: SonarQube Analysis
           command: |
-            echo "Checking file structure:"
-            find ./server
-      - run:
-          name: Install Dependencies
-          command: |
-            cd server && npm install
-      - run:
-          name: Install Newman Locally
-          command: npm install newman
-      - run:
-          name: Start API Server
-          command: |
-            cd server && npm start &
-      - run:
-          name: Wait for server to start
-          command: sleep 10
-      - run:
-          name: Run Postman Collection with Newman
-          command: |
-            npx newman run "./server/NewCollection.postman_collection.json" \
-              --insecure \
-              --reporters cli,junit \
-              --reporter-junit-export "server/newman/results.xml"
+            cd BACKEND
+            echo "Sonar branch value is: $CIRCLE_BRANCH"
+            echo "Sonar org value is: $SONAR_ORG"
+            sonar-scanner \
+              -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
+              -Dsonar.organization="$SONAR_ORG" \
+              -Dsonar.host.url="https://sonarcloud.io" \
+              -Dsonar.exclusions="**/android/**,**/ios/**" \
+              -Dsonar.login="$SONAR_TOKEN" \
+              -Dsonar.branch.name="$SONAR_BRANCH" \
+              -Dsonar.sources="." \
+              -Dsonar.javascript.file.suffixes=.js \
+              -Dsonar.cfile.file.suffixes=.
 
-
+  newmantest:
+    docker:
+      - image: cimg/node:18.20.2
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            cd server
+            npm install
+      - run:
+          name: Run Newman tests
+          command: |
+            cd server
+            npm run test-api &
+      - attach_workspace:
+          at: ~/workspace
       - store_test_results:
-          path: server/newman/results.xml
+          path: newman/results.xml
       - store_artifacts:
-          path: server/newman
+          path: newman
 
 workflows:
   version: 2
-  test:
+  sonar_workflow:
     jobs:
-      - test-postman-collection
+      - sonarqube
+      - newmantest:
+          requires:
+            - sonarqube
