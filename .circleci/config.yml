@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:18.20.2  # Node.js version, you can keep this as is
+      - image: cimg/node:18.20.2  # Node.js version, keep as required
     working_directory: ~/repo
 
 jobs:
@@ -16,9 +16,10 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk
-            export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"  # Set JAVA_HOME to Java 17
-            export PATH="$JAVA_HOME/bin:$PATH"                     # Prepend Java 17 to PATH
-            java -version  # Verify Java 17 is installed and set as default
+            echo 'export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"' >> $BASH_ENV  # Set JAVA_HOME in environment
+            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV                   # Ensure Java 17 is in PATH
+            source $BASH_ENV  # Reload environment variables
+            java -version  # Verify Java 17 is the default
       - run:
           name: Install Sonar Scanner
           command: |
@@ -28,10 +29,7 @@ jobs:
       - run:
           name: SonarQube Analysis
           command: |
-            export PATH=$PATH:~/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin
             cd server
-            echo "Sonar branch value is: $CIRCLE_BRANCH"
-            echo "Sonar org value is: $SONAR_ORG"
             sonar-scanner \
               -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
               -Dsonar.organization="$SONAR_ORG" \
