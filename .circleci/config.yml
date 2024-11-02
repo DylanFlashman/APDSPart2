@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:18.20.2  # Node.js version, adjust as required
+      - image: cimg/node:18.20.2  # Node.js version with default Java 11
     working_directory: ~/repo
 
 jobs:
@@ -11,15 +11,6 @@ jobs:
     executor: node-executor
     steps:
       - checkout
-      - run:
-          name: Install Java 17
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y openjdk-17-jdk
-            echo 'export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"' >> $BASH_ENV
-            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
-            source $BASH_ENV
-            java -version  # Verify Java 17 is set as default
       - run:
           name: Install Sonar Scanner
           command: |
@@ -31,7 +22,7 @@ jobs:
           name: SonarQube Analysis
           command: |
             cd server
-            JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" sonar-scanner \
+            sonar-scanner \
               -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
               -Dsonar.organization="$SONAR_ORG" \
               -Dsonar.host.url="https://sonarcloud.io" \
