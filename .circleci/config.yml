@@ -13,6 +13,15 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check Java Version
+          command: java -version
+      - run:
+          name: Set JAVA_HOME and Update PATH
+          command: |
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk" >> $BASH_ENV
+            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
+            source $BASH_ENV  # Reload the environment variables
+      - run:
           name: Install Sonar Scanner
           command: |
             curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
