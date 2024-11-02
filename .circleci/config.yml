@@ -31,7 +31,7 @@ jobs:
           name: SonarQube Analysis
           command: |
             cd server
-            sonar-scanner \
+            JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" sonar-scanner \
               -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
               -Dsonar.organization="$SONAR_ORG" \
               -Dsonar.host.url="https://sonarcloud.io" \
