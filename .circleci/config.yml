@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:18.20.2  # Node.js version, keep as required
+      - image: cimg/node:18.20.2  # Node.js version, adjust as required
     working_directory: ~/repo
 
 jobs:
@@ -16,16 +16,17 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk
-            echo 'export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"' >> $BASH_ENV  # Set JAVA_HOME in environment
-            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV                   # Ensure Java 17 is in PATH
-            source $BASH_ENV  # Reload environment variables
-            java -version  # Verify Java 17 is the default
+            echo 'export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"' >> $BASH_ENV
+            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
+            source $BASH_ENV
+            java -version  # Verify Java 17 is set as default
       - run:
           name: Install Sonar Scanner
           command: |
             curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
             unzip sonar-scanner.zip -d ~/sonar-scanner
-            export PATH=$PATH:~/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin
+            echo 'export PATH="$PATH:$HOME/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin"' >> $BASH_ENV
+            source $BASH_ENV  # Reload PATH with sonar-scanner
       - run:
           name: SonarQube Analysis
           command: |
