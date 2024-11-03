@@ -3,52 +3,64 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: cimg/node:23.1.0
-    working_directory: ~/repo  # Adjust if needed
+      - image: cimg/node:18.20.2  # Node.js version
+    working_directory: ~/repo
 
 jobs:
-  test-postman-collection:
-    executor: node-executor
+  sonarqube:
+    docker:
+      - image: sonarsource/sonar-scanner-cli  # Using SonarSource image for SonarScanner
+    resource_class: small
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/workspace
+      - run:
+          name: Set Sonar Variables and Run Scanner
+          command: |
+            SONAR_BRANCH="${CIRCLE_BRANCH:-master}"
+            echo "Sonar branch value is: $SONAR_BRANCH"
+            echo "Sonar org value is: $SONAR_ORG"
+            sonar-scanner \
+              -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
+              -Dsonar.organization="$SONAR_ORG" \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.exclusions="**/android/**,**/ios/**" \
+              -Dsonar.login="$SONAR_TOKEN" \
+              -Dsonar.branch.name="$SONAR_BRANCH" \
+              -Dsonar.sources="." \
+              -Dsonar.c.file.suffixes=- \
+              -Dsonar.cpp.file.suffixes=- \
+              -Dsonar.objc.file.suffixes=-
+
+  newmantest:
+    docker:
+      - image: cimg/node:18.20.2
+    resource_class: small
     steps:
       - checkout
       - run:
-          name: Debug file structure
-          command: ls -R
-      - run:
-          name: List files in server folder
+          name: Install dependencies
           command: |
-            echo "Checking file structure:"
-            find ./server
+            cd server
+            npm install
       - run:
-          name: Install Dependencies
+          name: Run Newman tests
           command: |
-            cd server && npm install
-      - run:
-          name: Install Newman Locally
-          command: npm install newman
-      - run:
-          name: Start API Server
-          command: |
-            cd server && npm start &
-      - run:
-          name: Wait for server to start
-          command: sleep 10
-      - run:
-          name: Run Postman Collection with Newman
-          command: |
-            npx newman run "./server/NewCollection.postman_collection.json" \
-              --insecure \
-              --reporters cli,junit \
-              --reporter-junit-export "server/newman/results.xml"
-
-
+            cd server
+            npm run test-api &
+      - attach_workspace:
+          at: ~/workspace
       - store_test_results:
-          path: server/newman/results.xml
+          path: newman/results.xml
       - store_artifacts:
-          path: server/newman
+          path: newman
 
 workflows:
   version: 2
-  test:
+  sonar_workflow:
     jobs:
-      - test-postman-collection
+      - sonarqube
+      - newmantest:
+          requires:
+            - sonarqube
