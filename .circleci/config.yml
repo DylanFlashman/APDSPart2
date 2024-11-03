@@ -8,7 +8,6 @@ executors:
 
 jobs:
   sonarqube:
-    working_directory: ~/build
     docker:
       - image: sonarsource/sonar-scanner-cli  # Using SonarSource image for SonarScanner
     resource_class: small
